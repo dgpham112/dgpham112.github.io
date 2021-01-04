@@ -129,81 +129,47 @@
 
 <body>
 
-    <div style="width: 100%; height:100%">
-     <iframe style="width: 100%; height: 100%; border: 0;" src="https://configiq.keypointintelligence.com/" width="100%" height="100%"></iframe>
-    
-    </div>
-    
-<div class="container main-ctn" style="display:none">
-  
-  <div class="navbar-ctn">
-    
-   
-      <div class="navbar-home">
-        
-        <a class="navbar-item" href="#">Home</a>
-
-      </div>
-
-
-      <div class="navbar-right-group">
-        <a class="navbar-item" href="#">About</a>
-        <a class="navbar-item" href="#">Projects</a>
-        <a class="navbar-item" href="#">Resume</a>
-      </div>
-
-
-
-  </div>
-
-
-  <div class="profile">
-    <div class="profile-picture">
-      <img src="/img/profile-pic.JPG" />
-    </div>
-    <div class="profile-name">
-      Pham Minh Duc
-    </div>
-
-    <div class="profile-location">Hanoi, Viet Nam</div>
-
-    <div class="bio">
-    Project Manager, PMP ®. Currently working in FPT Software
-    </div>
-
-    <div class="social-links">
-
-        <a target="_blank" href="https://www.linkedin.com/in/duc-pham-128ba431/"><span class="fa fa-linkedin"></span></a>
-    <a target="_blank" href="https://www.facebook.com/dg.pham"><span class="fa fa-facebook" data-toggle="tooltip" title="dg.pham">
-      
-    </span></a><a href="#"><span class="fa fa-instagram"></span></a>
-    <a href="#" data-toggle="tooltip" title="dg.pham"><span class="fa fa-skype"></span></a>
-
-
-    <a href="mailto:dgpham112@gmail.com" data-toggle="tooltip" title="dgpham112@gmail.com"><span class="fa fa-envelope"></span></a>
-
-    </div>
-
-
-  </div>
-
-    <div class="footer">
-
-      <div class="footer-left">© Pham Minh Duc</div>
-      <div class="footer-right"><a href="mailto:dgpham112@gmail.com">dgpham112@gmail.com</a></div>
-        
-    </div>
-
-
-
-</div>
+    <div id="paramOutput"></div>
 
 
 <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-    $('[data-toggle="popover"]').popover({trigger: 'hover click'});
-});
+
+   function getAllParams() {
+       var params = new URLSearchParams(location.href);
+        let paramObj = {};
+        for(var value of params.keys()) {
+             paramObj[value] = params.get(value);
+         }
+    
+       return params;
+    }
+    
+    function renderParamItem(label, value) {
+        var ctn = $("<div class='param-item' />");
+        var paramLabel =  $("<label />");
+        paramLabel.html(label);
+        var paramValue =  $("<span />");
+        paramValue.html(value);
+        ctn.append(paramLabel);
+        ctn.append(paramValue);
+        $("#paramOutput").append(ctn);
+    
+    }
+    
+    function renderOutput() {
+        var params = getAllParams();
+        for(var prop in params) {
+            renderParamItem(prop, params[prop]);
+        }
+
+    
+    }
+    
+    
+$(function() {
+    renderOutput();
+});    
+    
 </script>
 
 
