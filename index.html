@@ -145,9 +145,14 @@
     }
     
     function renderParamItem(label, value) {
+        
+        if(label.indexOf("?") != -1) {
+            label = label.split("?")[1];
+        }
+        
         var ctn = $("<div class='param-item' />");
         var paramLabel =  $("<label />");
-        paramLabel.html(label);
+        paramLabel.html(label+ ": ");
         var paramValue =  $("<span />");
         paramValue.html(value);
         ctn.append(paramLabel);
